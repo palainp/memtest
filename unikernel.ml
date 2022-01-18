@@ -21,10 +21,9 @@ module MemTest (S: Tcpip.Stack.V4) = struct
     )
 
   let start s =
-    S.TCPV4.create_connection (S.tcpv4 s) (Ipaddr.V4.of_string_exn "10.0.0.1", 1234) >|= function
-    | Ok flow -> Memtrace.start_tracing ~sampling_rate:1e-4 ~context:"my unikernel" flow
-    | Error _ -> ()
     memory_usage ;
-    Lwt.return_unit
+    S.TCPV4.create_connection (S.tcpv4 s) (Ipaddr.V4.of_string_exn "10.0.0.1", 1234) >|= function
+    | Ok flow -> Memtrace.start_tracing ~sampling_rate:1e-4 flow
+    | Error _ -> ()
 
 end

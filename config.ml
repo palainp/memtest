@@ -6,7 +6,7 @@ let main =
   foreign
     ~packages:[
       package ~min:"7.0.0" "tcpip";
-      package "memtrace";
+      package "memtrace-mirage";
     ]
     "Unikernel.MemTest" (stackv4  @-> job)
 
